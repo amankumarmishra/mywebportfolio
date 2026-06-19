@@ -1260,6 +1260,7 @@ section.section-visible {
   }
   .hero-content h1 {
     font-size: 3.5rem;
+    word-break: keep-all;
   }
   .nav-links {
     display: none;
@@ -1315,6 +1316,10 @@ section.section-visible {
   .timeline-content h3 {
     padding-right: 50px;
     font-size: 1.1rem;
+  }
+
+  section#about {
+    overflow: hidden;
   }
 
   .about-image img {
@@ -1399,6 +1404,7 @@ section.section-visible {
 
   .hero-content h1 {
     font-size: 2.2rem;
+    word-break: keep-all;
   }
 
   .tagline {
@@ -1422,9 +1428,14 @@ section.section-visible {
     padding: 12px 20px;
   }
 
+  section#about {
+    overflow: hidden;
+  }
+
   .about-image img {
     width: 220px;
     height: 220px;
+    max-width: 100%;
   }
 
   .about-text-inner {
