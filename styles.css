@@ -2434,3 +2434,42 @@ body.light-mode .input-group textarea:focus {
     text-align: right;     /* Pushes the links toward the hamburger icon */
   }
 }
+
+/* =========================================================
+   ULTIMATE MOBILE FIXES (Keep at absolute bottom of file)
+   ========================================================= */
+@media (max-width: 768px) {
+    /* 1. Force the giant text to scale down and stack cleanly */
+    .hero-content h1 {
+        font-size: 3rem !important; /* Forces it down from 4.8rem */
+        line-height: 1.1 !important;
+    }
+    
+    /* Forces the spaces between your names to act as line-breaks */
+    .rubber-band.space {
+        display: block !important;
+        height: 5px !important;
+    }
+
+    /* 2. Force the mobile menu to have a solid background in Light Mode */
+    body.light-mode .nav-links {
+        background: rgba(255, 255, 255, 0.98) !important;
+        border: 1px solid rgba(0, 0, 0, 0.1) !important;
+        box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15) !important;
+        backdrop-filter: blur(12px) !important;
+        -webkit-backdrop-filter: blur(12px) !important;
+        z-index: 9999 !important;
+        
+        /* Box sizing */
+        min-width: 220px !important;
+        align-items: flex-end !important;
+        padding: 20px !important;
+    }
+    
+    /* Clean up the text alignment inside the mobile menu */
+    .nav-item {
+        width: 100% !important;
+        text-align: right !important;
+        padding: 8px 5px !important;
+    }
+}
