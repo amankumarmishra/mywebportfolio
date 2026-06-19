@@ -627,6 +627,38 @@ document.addEventListener('DOMContentLoaded', () => {
             btnEl.textContent = 'START ENGINE';
         }
         if (hiEl) hiEl.textContent = pad(hs);
+
+        // --- ON-SCREEN MOBILE CONTROLS LOGIC ---
+        var btnL = document.getElementById('btnSteerLeft');
+        var btnR = document.getElementById('btnSteerRight');
+
+        function pressLeft(e) { e.preventDefault(); e.stopPropagation(); keys['ArrowLeft'] = true; }
+        function releaseLeft(e) { e.preventDefault(); e.stopPropagation(); keys['ArrowLeft'] = false; }
+        function pressRight(e) { e.preventDefault(); e.stopPropagation(); keys['ArrowRight'] = true; }
+        function releaseRight(e) { e.preventDefault(); e.stopPropagation(); keys['ArrowRight'] = false; }
+
+        if (btnL) {
+            // Touch events for phones
+            btnL.addEventListener('touchstart', pressLeft, {passive: false});
+            btnL.addEventListener('touchend', releaseLeft, {passive: false});
+            btnL.addEventListener('touchcancel', releaseLeft, {passive: false});
+            // Mouse events so you can test it on a desktop browser simulator
+            btnL.addEventListener('mousedown', pressLeft);
+            btnL.addEventListener('mouseup', releaseLeft);
+            btnL.addEventListener('mouseleave', releaseLeft);
+        }
+
+        if (btnR) {
+            // Touch events for phones
+            btnR.addEventListener('touchstart', pressRight, {passive: false});
+            btnR.addEventListener('touchend', releaseRight, {passive: false});
+            btnR.addEventListener('touchcancel', releaseRight, {passive: false});
+            // Mouse events so you can test it on a desktop browser simulator
+            btnR.addEventListener('mousedown', pressRight);
+            btnR.addEventListener('mouseup', releaseRight);
+            btnR.addEventListener('mouseleave', releaseRight);
+        }
+        
     })();
 
     // =========================================================

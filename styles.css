@@ -1112,9 +1112,10 @@ nav.floating-nav {
     color: #ffffff;
     background: #222;
     border: 1px solid rgba(255, 255, 255, 0.1);
-    /* Transform transition is snappy for the magnetic release */
     transition: transform 0.2s cubic-bezier(0.25, 1, 0.5, 1), background 0.3s ease, box-shadow 0.3s ease; 
-    pointer-events: none; /* Let the wrapper handle the mouse events */
+    
+    /* CHANGED: Restored pointer events so the link is actually clickable! */
+    pointer-events: auto; 
 }
 
 .magnetic-wrapper:hover .btn-linkedin {
@@ -2471,5 +2472,64 @@ body.light-mode .input-group textarea:focus {
         width: 100% !important;
         text-align: right !important;
         padding: 8px 5px !important;
+    }
+
+    /* 3. Disable magnetic dodging on touch screens so buttons can be tapped */
+    .magnetic-wrapper {
+        padding: 10px !important;
+        margin: 0 !important;
+    }
+    .magnetic-btn {
+        transform: none !important; /* Forces the button to stay still when tapped */
+    }
+
+}
+
+/* =========================================================
+   MOBILE GAME ARCADE CONTROLS
+   ========================================================= */
+.mobile-game-controls {
+    display: none; /* Hidden completely on desktop */
+    position: absolute;
+    bottom: 20px;
+    left: 0;
+    width: 100%;
+    justify-content: space-between;
+    padding: 0 30px;
+    z-index: 8; /* Sits above the canvas but below the start menu */
+    pointer-events: none; /* Lets clicks pass through the empty space */
+}
+
+.steer-btn {
+    width: 65px;
+    height: 65px;
+    border-radius: 50%;
+    background: rgba(20, 20, 20, 0.8);
+    border: 2px solid var(--primary-red);
+    color: #fff;
+    font-size: 1.8rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+    touch-action: none; /* Prevents screen zooming when tapped rapidly */
+    pointer-events: auto; /* Re-enables touching the actual button */
+    transition: all 0.1s ease;
+    box-shadow: 0 0 15px rgba(255, 24, 1, 0.2), inset 0 0 10px rgba(255, 24, 1, 0.2);
+    cursor: pointer;
+}
+
+/* Lights up bright red when you hold your thumb on it */
+.steer-btn:active {
+    background: var(--primary-red);
+    transform: scale(0.9);
+    box-shadow: 0 0 25px var(--primary-red-glow);
+}
+
+/* Only show the controls on mobile screens */
+@media (max-width: 768px) {
+    .mobile-game-controls {
+        display: flex; 
     }
 }
