@@ -1,0 +1,2086 @@
+/* Variables & Theming */
+:root {
+  --bg-color: #0d0d0d;
+  --surface-color: #1a1a1a;
+  --primary-red: #ff1801;
+  --primary-red-glow: rgba(255, 24, 1, 0.4);
+  --text-main: #f4f4f4;
+  --text-muted: #a0a0a0;
+  --border-color: #333;
+  --transition-smooth: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: "Inter", sans-serif;
+  background-color: var(--bg-color);
+  color: var(--text-main);
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+h1,
+h2,
+h3,
+.logo {
+  font-family: "Racing Sans One", cursive;
+  letter-spacing: 1.5px;
+}
+
+.container {
+  max-width: 1200px;
+  width: 100%; /* Ensures Flexbox doesn't shrink the width */
+  margin: 0 auto;
+  padding: 0 20px; /* Reduced vertical padding because Flexbox handles the spacing now */
+}
+
+/* Typography & Utilities */
+.section-title {
+  font-size: 2.8rem;
+  color: var(--text-main);
+  margin-bottom: 50px;
+  display: inline-block;
+  position: relative;
+}
+
+.section-title i {
+  color: var(--primary-red);
+}
+
+.section-title::after {
+  content: "";
+  position: absolute;
+  bottom: -10px;
+  left: 0;
+  width: 50%;
+  height: 4px;
+  background: var(--primary-red);
+  border-radius: 2px;
+}
+
+/* Navigation */
+/* --- Floating Pill Navigation --- */
+nav.floating-nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  /* Creates the floating pill shape */
+  width: 85%;
+  max-width: 900px;
+  padding: 10px 25px;
+  border-radius: 50px;
+
+  /* Centers the nav horizontally */
+  position: fixed;
+  top: 25px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1000;
+
+  /* Frosted glass effect */
+  background: rgba(20, 20, 20, 0.7);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
+  transition: all 0.3s ease;
+}
+
+/* Avatar Styling */
+.nav-avatar {
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid var(--primary-red);
+  display: block;
+  box-shadow: 0 0 10px rgba(255, 24, 1, 0.3);
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  cursor: pointer;
+}
+
+.nav-avatar:hover {
+  transform: scale(1.15) rotate(5deg); /* Pops out and adds a slight playful tilt */
+  box-shadow: 0 10px 20px rgba(255, 24, 1, 0.6); /* Brightens the red glow */
+  border-color: #fff; /* Flashes the border white */
+}
+
+.nav-links {
+  list-style: none;
+  display: flex;
+  gap: 30px;
+  align-items: center;
+}
+
+.nav-item {
+  color: var(--text-muted);
+  text-decoration: none;
+  font-weight: 500;
+  font-size: 0.95rem;
+  transition: color 0.3s ease;
+  display: flex;
+  align-items: center;
+  transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.nav-item:hover {
+  color: var(--text-main);
+  transform: translateY(-3px) scale(1.1); /* Lifts the text up and scales it */
+  text-shadow: 0 5px 10px rgba(0, 0, 0, 0.5); /* Adds a drop shadow below the text */
+}
+
+/* The Active State Marker (Dot) */
+.nav-item.active {
+  color: var(--text-main);
+  font-weight: 600;
+}
+
+.nav-item.active::before {
+  content: "•";
+  color: var(--primary-red);
+  font-size: 1.5rem;
+  margin-right: 8px;
+  line-height: 0; /* Keeps the dot vertically aligned with text */
+  text-shadow: 0 0 8px var(--primary-red);
+}
+
+.hamburger {
+  display: none;
+  cursor: pointer;
+  font-size: 1.5rem;
+}
+
+#home {
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  background-color: transparent;
+  position: relative;
+  padding: 0 20px;
+  z-index: 1; /* Ensures the hero content is above the gear background */
+  margin-bottom: 90px;
+}
+
+#experience {
+  margin-bottom: 90px;
+}
+
+#skills{
+  padding-bottom: 90px;
+}
+
+/* Ensure content stays on top of the gears */
+.hero-content, .track-line {
+  z-index: 1;
+  position: relative;
+}
+
+/* --- Full Page Gear Background --- */
+.gear-background {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+
+  /* MODIFIED: Changed from -1 to 0 so it doesn't hide behind the body */
+  z-index: 0;
+
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.gear {
+  position: absolute;
+
+  /* MODIFIED: Boosted from 0.03 to 0.08 so they clearly stand out against the black */
+  color: rgba(255, 255, 255, 0.08);
+
+  transition: transform 0.05s linear;
+}
+
+/* Sizing and positioning the individual gears around the screen edges */
+.gear-1 {
+  font-size: 40rem;
+  top: -15%;
+  left: -10%;
+}
+
+.gear-2 {
+  font-size: 30rem;
+  bottom: -15%;
+  right: -10%;
+}
+
+.gear-3 {
+  font-size: 20rem;
+  top: 40%;
+  right: 15%;
+}
+
+.gear-4 {
+  font-size: 25rem;
+  top: 60%;
+  left: -5%;
+}
+
+@media (max-width: 1024px) {
+  .gear-1 {
+    font-size: 30rem;
+    top: -20%;
+    left: -15%;
+  }
+  .gear-2 {
+    font-size: 20rem;
+    bottom: -20%;
+    right: -15%;
+  }
+  .gear-3 {
+    font-size: 15rem;
+    top: 50%;
+    right: 10%;
+  }
+  .gear-4 {
+    font-size: 18rem;
+    top: 70%;
+    left: -10%;
+  }
+}
+
+/* --- Tagline Interactive High-Speed Effect --- */
+.tagline {
+  font-family:
+    "Impact", "Arial Black", sans-serif; /* The thick, bold font stack */
+  font-size: 2.2rem; /* Scaled up slightly for maximum presence */
+  font-weight: 900; /* Forces the thickest available weight */
+  text-transform: uppercase; /* Makes it look like a bold racing sponsor decal */
+  letter-spacing: 2px; /* Gives the thick letters a little breathing room */
+  color: var(--primary-red);
+  margin-bottom: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 15px;
+  transform-style: preserve-3d;
+  transition: transform 0.1s ease-out;
+  cursor: crosshair;
+}
+
+.tagline .role {
+  display: inline-block;
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+.tagline .car-emoji {
+  display: inline-block;
+  transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  transform: translateZ(20px); /* Pops the car out slightly in 3D space */
+}
+
+/* Hover State: The Acceleration */
+.tagline:hover .role {
+  transform: skewX(-12deg) translateZ(10px); /* Leans forward into the speed */
+  color: #fff; /* Flashes white */
+  text-shadow:
+    -4px 0px 0px var(--primary-red),
+    4px 0px 5px rgba(255, 255, 255, 0.3); /* Creates a motion blur tail-light effect */
+}
+
+.tagline:hover .car-emoji {
+  /* Drives the car forward to the right and scales it up */
+  transform: translateZ(40px) translateX(25px) scale(1.3);
+  filter: drop-shadow(-5px 0 5px var(--primary-red));
+}
+
+.social-hero {
+  margin-bottom: 40px;
+}
+
+.social-hero a {
+  color: var(--text-main);
+  font-size: 1.8rem;
+  margin: 0 15px;
+  transition: var(--transition-smooth);
+  display: inline-block;
+}
+
+.social-hero a:hover {
+  color: var(--primary-red);
+  transform: translateY(-5px) scale(1.1);
+  text-shadow: 0 0 15px var(--primary-red-glow);
+}
+
+/* Buttons */
+.btn {
+  display: inline-block;
+  padding: 15px 35px;
+  background: var(--primary-red);
+  color: #fff;
+  text-decoration: none;
+  font-family: "Racing Sans One", cursive;
+  font-size: 1.1rem;
+  border-radius: 4px;
+  transition: var(--transition-smooth);
+  border: 2px solid var(--primary-red);
+}
+
+.btn:hover {
+  background: transparent;
+  color: var(--primary-red);
+  box-shadow: 0 0 20px var(--primary-red-glow);
+  transform: translateX(5px);
+}
+
+.btn-outline {
+  background: transparent;
+  color: var(--text-main);
+  border-color: var(--text-muted);
+}
+.btn-outline:hover {
+  border-color: #0077b5; /* LinkedIn Blue */
+  color: #0077b5;
+  box-shadow: 0 0 20px rgba(0, 119, 181, 0.4);
+}
+
+/* --- F1 Track Animation --- */
+.track-line {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 50px; /* Gives the car room to breathe above the line */
+  border-bottom: 2px solid var(--primary-red); /* Creates the red track line */
+  overflow: hidden; /* Prevents the page from scrolling horizontally */
+}
+
+.car-wrapper {
+  position: absolute;
+  bottom: -8px; /* Sits the tires perfectly on the red line */
+  left: -60px; /* Starts completely off-screen */
+  animation: driveLap 6s linear infinite; /* Adjust '6s' to make it faster/slower */
+}
+
+.f1-car-emoji {
+  display: inline-block;
+  font-size: 2.5rem;
+  /* Most OS emojis face left by default. This flips it to drive right. */
+  transform: scaleX(-1);
+  filter: drop-shadow(
+    0 0 5px rgba(255, 24, 1, 0.5)
+  ); /* Adds a slight red glow */
+}
+
+@keyframes driveLap {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    /* Drives the car completely across the screen and out of frame */
+    transform: translateX(calc(100vw + 100px));
+  }
+}
+
+/* Buttons */
+.btn {
+  display: inline-block;
+  padding: 15px 35px;
+  background: var(--primary-red);
+  color: #fff;
+  text-decoration: none;
+  font-family: "Racing Sans One", cursive;
+  font-size: 1.1rem;
+  border-radius: 4px;
+  transition: var(--transition-smooth);
+  border: 2px solid var(--primary-red);
+}
+
+.btn:hover {
+  background: transparent;
+  color: var(--primary-red);
+  box-shadow: 0 0 20px var(--primary-red-glow);
+  transform: translateX(5px);
+}
+
+.btn-outline {
+  background: transparent;
+  color: var(--text-main);
+  border-color: var(--text-muted);
+}
+.btn-outline:hover {
+  border-color: #0077b5; /* LinkedIn Blue */
+  color: #0077b5;
+  box-shadow: 0 0 20px rgba(0, 119, 181, 0.4);
+}
+
+/* --- About Section (Interactive Hover Reveal) --- */
+.about-interactive-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-width: 800px;
+  margin: 0 auto;
+  cursor: pointer; /* Indicates to the user that they can interact with it */
+  padding-top: 20px;
+}
+
+.about-image {
+  position: relative;
+  z-index: 2;
+  transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.about-image img {
+  width: 380px;
+  height: 380px;
+  border-radius: 12px;
+  object-fit: cover;
+  border: 3px solid var(--border-color);
+  position: relative;
+  z-index: 2;
+  transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  filter: grayscale(100%);
+}
+
+.image-glow {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 100%;
+  height: 100%;
+  background: var(--primary-red);
+  filter: blur(50px);
+  opacity: 0;
+  z-index: 1;
+  transition: opacity 0.5s ease;
+}
+
+/* Hidden text container */
+.about-text-reveal {
+  max-height: 0; /* Collapses the container initially */
+  opacity: 0; /* Makes it invisible */
+  overflow: hidden; /* Ensures text doesn't spill out while collapsed */
+  transform: translateY(-40px); /* Pulls it up slightly so it slides down */
+  transition: all 0.6s cubic-bezier(0.25, 0.8, 0.25, 1);
+  width: 100%;
+}
+
+.about-text-inner {
+  padding-top: 30px;
+  color: var(--text-muted);
+  font-size: 1.1rem;
+  line-height: 1.8;
+}
+
+/* --- Hover Animations --- */
+
+/* 1. Pop the image up and scale it, reveal colors */
+.about-interactive-wrapper:hover .about-image {
+  transform: translateY(-15px) scale(1.05);
+}
+
+.about-interactive-wrapper:hover .about-image img {
+  filter: grayscale(0%);
+  border-color: var(--primary-red);
+  box-shadow: 0 15px 30px rgba(255, 24, 1, 0.3);
+}
+
+.about-interactive-wrapper:hover .image-glow {
+  opacity: 0.4;
+}
+
+/* 2. Slide down and fade in the text */
+.about-interactive-wrapper:hover .about-text-reveal {
+  max-height: 500px; /* Expands container to fit text */
+  opacity: 1;
+  transform: translateY(0); /* Drops text into natural position */
+}
+
+/* Timeline / Experience */
+/* --- Timeline Structure & Alignment --- */
+.timeline {
+  position: relative;
+  padding-left: 50px; /* Gave it slightly more breathing room */
+  border-left: 3px solid var(--border-color);
+  margin-left: 15px;
+}
+
+.timeline-item {
+  position: relative;
+  margin-bottom: 50px;
+}
+
+/* 1. Dropped the dot down to align with the text */
+.timeline-dot {
+  position: absolute;
+  left: -60px; /* Mathematically centered on the vertical line */
+  top: 35px; /* Pushed down to perfectly align with the Company Name */
+  width: 16px;
+  height: 16px;
+  background: var(--bg-color);
+  border: 3px solid var(--primary-red);
+  border-radius: 50%;
+  transition: var(--transition-smooth);
+  z-index: 2;
+}
+
+/* 2. NEW: Horizontal Connecting Branch */
+.timeline-item::before {
+  content: "";
+  position: absolute;
+  left: -50px; /* Starts at the dot */
+  top: 44px; /* Dead center of the dropped dot */
+  width: 50px; /* Reaches exactly to the edge of the card */
+  height: 2px;
+  background: var(--border-color);
+  z-index: 1;
+  transition: var(--transition-smooth);
+}
+
+/* 3. Hover Effects */
+.timeline-item:hover .timeline-dot {
+  background: var(--primary-red);
+  box-shadow: 0 0 15px var(--primary-red);
+}
+
+.timeline-item:hover::before {
+  background: var(--primary-red);
+  box-shadow: 0 0 10px var(--primary-red-glow);
+}
+
+.timeline-content {
+  background: var(--surface-color);
+  padding: 30px;
+  border-radius: 8px;
+  border: 1px solid var(--border-color);
+  transition: var(--transition-smooth);
+  position: relative;
+}
+/* --- NEW ADDITION: Company Logo Styling --- */
+.company-logo {
+  position: absolute;
+  top: 30px;
+  right: 30px;
+  width: 60px; /* Adjust this value to make the logo bigger or smaller */
+  height: auto;
+  border-radius: 4px; /* Softens the edges of square images */
+  opacity: 0.8; /* Blends it slightly into the dark theme */
+  transition: all 0.3s ease;
+}
+
+.timeline-content:hover {
+  transform: translateX(10px);
+  border-color: var(--primary-red);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+}
+
+.timeline-content h3 {
+  color: var(--text-main);
+  margin-bottom: 5px;
+
+  /* ADD THIS: Creates a safe zone so your long heading text doesn't overlap the logo */
+  padding-right: 70px;
+}
+
+.timeline-content h4 {
+  color: var(--text-muted);
+  font-weight: 400;
+  margin-bottom: 10px;
+}
+.timeline-content .date {
+  display: inline-block;
+  color: var(--primary-red);
+  font-weight: 600;
+  margin-bottom: 15px;
+  font-size: 0.9rem;
+}
+.timeline-content ul {
+  list-style: none;
+}
+.timeline-content ul li {
+  margin-bottom: 10px;
+  padding-left: 20px;
+  position: relative;
+  color: var(--text-muted);
+}
+.timeline-content ul li::before {
+  content: "▹";
+  position: absolute;
+  left: 0;
+  color: var(--primary-red);
+}
+
+/* --- Flowchart Tree Layout (Projects) --- */
+.flowchart-tree {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 20px;
+  width: 100%;
+}
+
+/* The main vertical line dropping from the top */
+.tree-trunk {
+  width: 4px;
+  height: 35px;
+  background: var(--primary-red);
+  box-shadow: 0 0 10px var(--primary-red-glow);
+}
+
+/* The horizontal connecting line */
+.tree-branch {
+  width: 66%; /* Exactly reaches the centers of the left and right cards */
+  height: 4px;
+  background: var(--primary-red);
+  box-shadow: 0 0 10px var(--primary-red-glow);
+  position: relative;
+}
+
+/* Container for the 3 columns */
+.tree-nodes {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  gap: 30px;
+}
+
+.node-wrapper {
+  flex: 1; /* Ensures all 3 columns take up equal width */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* The vertical lines dropping to each specific card */
+.node-stem {
+  width: 4px;
+  height: 35px;
+  background: var(--primary-red);
+  box-shadow: 0 0 10px var(--primary-red-glow);
+}
+
+/* --- Flowchart Interactive Cards --- */
+.flowchart-card {
+  background: var(--surface-color);
+  width: 100%;
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  padding: 30px 20px;
+  text-align: center;
+  transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  cursor: crosshair;
+  position: relative;
+  overflow: hidden; /* Crucial: Clips the text when it is collapsed */
+}
+
+.flowchart-card:hover {
+  border-color: var(--primary-red);
+  box-shadow:
+    0 15px 30px rgba(0, 0, 0, 0.6),
+    inset 0 0 20px rgba(255, 24, 1, 0.1);
+  transform: translateY(-5px);
+}
+
+.card-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 15px;
+}
+
+.card-icon {
+  font-size: 3rem;
+  color: var(--primary-red);
+  transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.flowchart-card:hover .card-icon {
+  transform: scale(1.2) translateY(-5px);
+  filter: drop-shadow(0 0 10px var(--primary-red));
+}
+
+.card-header h3 {
+  font-size: 1.5rem;
+  color: var(--text-main);
+  margin: 0;
+}
+
+/* --- Hidden Pop-up Details --- */
+.card-details {
+  max-height: 0; /* Initially takes up 0 space */
+  opacity: 0;
+  transform: translateY(20px); /* Dropped down slightly */
+  transition: all 0.6s cubic-bezier(0.25, 0.8, 0.25, 1);
+  pointer-events: none;
+}
+
+.flowchart-card:hover .card-details {
+  max-height: 400px; /* Expands to fit the text */
+  opacity: 1;
+  transform: translateY(0); /* Slides up into place */
+  margin-top: 25px; /* Adds space between the title and the details */
+  padding-top: 20px;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.card-details h4 {
+  color: var(--primary-red);
+  margin-bottom: 12px;
+  font-size: 1.05rem;
+}
+
+.card-details p {
+  color: var(--text-muted);
+  font-size: 0.95rem;
+  line-height: 1.6;
+}
+
+/* --- Mobile Responsiveness --- */
+/* Safely collapses the flowchart into a standard vertical list on small screens */
+@media (max-width: 900px) {
+  .tree-branch,
+  .tree-trunk,
+  .node-stem {
+    display: none;
+  }
+  .tree-nodes {
+    flex-direction: column;
+    gap: 20px;
+  }
+}
+
+/* Upcoming Highlight */
+.upcoming {
+  background: linear-gradient(145deg, #1a1a1a, #221111);
+  border-color: rgba(255, 24, 1, 0.3);
+}
+
+/* --- Telemetry & Tools Section --- */
+.subsection-title {
+  font-size: 1.5rem;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  margin-bottom: 20px;
+  margin-top: 40px;
+  font-weight: 600;
+}
+
+/* 1. Infinite Sponsor Marquee */
+.marquee-wrapper {
+  width: 100%;
+  overflow: hidden;
+  position: relative;
+  padding: 20px 0;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(20, 20, 20, 0.8) 10%,
+    rgba(20, 20, 20, 0.8) 90%,
+    transparent
+  );
+  border-top: 1px solid var(--border-color);
+  border-bottom: 1px solid var(--border-color);
+  white-space: nowrap;
+  display: flex;
+}
+
+/* Fades the left and right edges so tools seamlessly appear and disappear */
+.marquee-wrapper::before,
+.marquee-wrapper::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  width: 100px;
+  height: 100%;
+  z-index: 2;
+}
+.marquee-wrapper::before {
+  left: 0;
+  background: linear-gradient(to right, var(--bg-color), transparent);
+}
+.marquee-wrapper::after {
+  right: 0;
+  background: linear-gradient(to left, var(--bg-color), transparent);
+}
+
+.marquee-track {
+  display: inline-flex;
+  animation: scrollMarquee 25s linear infinite;
+}
+
+.cae-icon {
+  width: 20px;
+  height: 20px;
+  color: var(--primary-red);
+}
+
+/* Pauses the scrolling when you hover over it */
+.marquee-wrapper:hover .marquee-track {
+  animation-play-state: paused;
+}
+
+.tool-badge {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 25px;
+  background: var(--surface-color);
+  border: 1px solid var(--border-color);
+  border-radius: 50px;
+  margin: 0 15px;
+  font-weight: 600;
+  font-size: 1.1rem;
+  color: var(--text-main);
+  transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  cursor: default;
+}
+
+.tool-badge i {
+  color: var(--primary-red);
+  font-size: 1.3rem;
+}
+
+.tool-badge:hover {
+  transform: scale(1.1) translateY(-5px);
+  border-color: var(--primary-red);
+  box-shadow: 0 10px 20px rgba(255, 24, 1, 0.3);
+  background: rgba(255, 24, 1, 0.1);
+}
+
+@keyframes scrollMarquee {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  } /* Scrolls exactly half the width to seamlessly loop the duplicate set */
+}
+
+/* 2. Telemetry Grid (Technical Skills) */
+.telemetry-grid {
+  display: grid;
+
+  /* MODIFIED: Increased from 250px to 320px. 
+       This forces a maximum of 3 columns on desktop, 
+       while remaining fluid and auto-arranging for smaller screens! */
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+
+  gap: 20px;
+}
+
+.telemetry-node {
+  background: var(--surface-color);
+  border: 1px solid var(--border-color);
+  padding: 20px;
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  gap: 15px;
+  transition: all 0.3s ease;
+  cursor: crosshair;
+}
+
+.telemetry-node i {
+  font-size: 2.5rem;
+  color: var(--text-muted);
+  transition: all 0.3s ease;
+}
+
+.telemetry-node span {
+  font-weight: 600;
+  color: var(--text-main);
+}
+
+.telemetry-node:hover {
+  background: #111;
+  border-color: var(--primary-red);
+  box-shadow:
+    inset 0 0 20px rgba(255, 24, 1, 0.1),
+    0 5px 15px rgba(0, 0, 0, 0.5);
+  transform: translateY(-5px);
+}
+
+.telemetry-node:hover i {
+  color: var(--primary-red);
+  transform: scale(1.2);
+  filter: drop-shadow(0 0 5px var(--primary-red));
+}
+
+/* 3. Podium Grid (Certs & Volunteering) */
+.podium-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  gap: 20px;
+}
+
+.podium-card {
+  display: flex;
+  align-items: flex-start;
+  gap: 20px;
+  background: linear-gradient(145deg, var(--surface-color), #111);
+  padding: 25px;
+  border-radius: 12px;
+  border-left: 4px solid var(--primary-red);
+  transition: all 0.3s ease;
+}
+
+.podium-card:hover {
+  transform: translateX(10px);
+  box-shadow: -5px 10px 20px rgba(0, 0, 0, 0.5);
+}
+
+.icon-red {
+  font-size: 2rem;
+  color: var(--primary-red);
+  margin-top: 5px;
+}
+
+.podium-info h4 {
+  font-size: 1.2rem;
+  margin-bottom: 8px;
+  color: var(--text-main);
+}
+
+.podium-info p {
+  color: var(--text-muted);
+  font-size: 0.95rem;
+  line-height: 1.5;
+}
+
+.volunteering-list {
+  list-style: none;
+  margin-top: 15px;
+}
+.volunteering-list li {
+  color: var(--text-muted);
+  margin-bottom: 12px;
+  font-size: 0.95rem;
+}
+.volunteering-list i {
+  color: var(--primary-red);
+  margin-right: 10px;
+}
+
+/* =========================================================
+   TELEMETRY & MAGNETIC CONTACT SECTION
+   ========================================================= */
+
+.contact-finale {
+    padding: 100px 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.telemetry-contact-card {
+    background: linear-gradient(145deg, rgba(30, 30, 30, 0.6), rgba(15, 15, 15, 0.9));
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 16px;
+    width: 100%;
+    max-width: 800px;
+    position: relative;
+    overflow: hidden;
+    backdrop-filter: blur(12px);
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+    
+    /* NEW: Prepares the card for 3D rotation */
+    transform-style: preserve-3d;
+    /* NEW: Snappy transition for the tilt, smooth transition for the shadow */
+    transition: transform 0.1s ease-out, box-shadow 0.3s ease, border-color 0.3s ease;
+}
+
+.telemetry-contact-card:hover {
+    border-color: rgba(255, 255, 255, 0.2);
+    box-shadow: 0 30px 60px rgba(0, 0, 0, 0.7), inset 0 0 30px rgba(255, 255, 255, 0.02);
+    /* The transform hover is now handled dynamically by JavaScript! */
+}
+
+.telemetry-contact-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: radial-gradient(circle at 50% -20%, rgba(255,255,255,0.15), transparent 50%);
+    opacity: 0;
+    transition: opacity 0.4s ease;
+    pointer-events: none;
+    z-index: 1;
+}
+
+.telemetry-contact-card:hover::before {
+    opacity: 1;
+}
+
+/* --- Interactive RPM LED Strip --- */
+.rpm-led-strip {
+    display: flex;
+    justify-content: space-between;
+    padding: 15px 30px;
+    background: rgba(0, 0, 0, 0.5);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    gap: 8px;
+}
+
+.led {
+    height: 12px;
+    flex: 1;
+    border-radius: 4px;
+    background: #111; /* Off state */
+    transition: all 0.1s ease;
+    box-shadow: inset 0 2px 4px rgba(0,0,0,0.8);
+}
+
+/* On states triggered by JS */
+.led.led-green.on { background: #00ff00; box-shadow: 0 0 10px #00ff00; }
+.led.led-red.on { background: #ff1801; box-shadow: 0 0 10px #ff1801; }
+.led.led-blue.on { background: #0088ff; box-shadow: 0 0 10px #0088ff; }
+
+/* --- Content & Typography --- */
+.contact-content {
+    padding: 60px 40px;
+    text-align: center;
+}
+
+.contact-content h2 {
+    font-size: 2.5rem;
+    color: var(--text-main);
+    margin-bottom: 10px;
+}
+
+.contact-sub {
+    color: var(--text-muted);
+    font-size: 1.1rem;
+    margin-bottom: 30px;
+}
+
+.contact-code {
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 1.2rem;
+    margin-bottom: 50px;
+    color: #94a3b8;
+    background: rgba(0,0,0,0.3);
+    display: inline-block;
+    padding: 10px 20px;
+    border-radius: 8px;
+    border: 1px dashed rgba(255,255,255,0.1);
+}
+.contact-code span { color: var(--primary-red); }
+
+/* --- Magnetic Buttons --- */
+.magnetic-links {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    flex-wrap: wrap;
+}
+
+/* The wrapper creates an invisible "gravity field" for the mouse to hit */
+.magnetic-wrapper {
+    padding: 30px;
+    margin: -30px; 
+    cursor: pointer;
+}
+
+.magnetic-btn {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 16px 35px;
+    border-radius: 50px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    text-decoration: none;
+    color: #ffffff;
+    background: #222;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    /* Transform transition is snappy for the magnetic release */
+    transition: transform 0.2s cubic-bezier(0.25, 1, 0.5, 1), background 0.3s ease, box-shadow 0.3s ease; 
+    pointer-events: none; /* Let the wrapper handle the mouse events */
+}
+
+.magnetic-wrapper:hover .btn-linkedin {
+    background: #0077b5;
+    border-color: #0077b5;
+    box-shadow: 0 10px 30px rgba(0, 119, 181, 0.4);
+}
+
+.magnetic-wrapper:hover .btn-email {
+    background: var(--primary-red);
+    border-color: var(--primary-red);
+    box-shadow: 0 10px 30px var(--primary-red-glow);
+}
+
+/* --- Light Mode Overrides --- */
+body.light-mode .telemetry-contact-card {
+    background: rgba(255, 255, 255, 0.8);
+    border-color: rgba(0, 0, 0, 0.1);
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.05);
+}
+body.light-mode .rpm-led-strip { background: rgba(0, 0, 0, 0.05); border-color: rgba(0, 0, 0, 0.05); }
+body.light-mode .led { background: #e0e0e0; box-shadow: inset 0 2px 4px rgba(0,0,0,0.1); }
+body.light-mode .contact-content h2 { color: #1a1a1a; }
+body.light-mode .contact-code { background: #f4f5f7; border-color: rgba(0,0,0,0.1); color: #555; }
+body.light-mode .magnetic-btn { background: #ffffff; color: #1a1a1a; border-color: rgba(0,0,0,0.1); box-shadow: 0 5px 15px rgba(0,0,0,0.05); }
+body.light-mode .magnetic-wrapper:hover .magnetic-btn { color: #ffffff; }
+
+/* ─── Bottom Panel (gradient bar with buttons) ─── */
+.contact-panel {
+  position: relative;
+  margin: 0 -40px;
+  padding: 35px 40px 40px;
+  isolation: isolate;
+}
+
+.contact-panel-bg {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(255, 24, 1, 0.18) 0%, rgba(130, 58, 144, 0.12) 50%, transparent 100%);
+  border-top: 1px solid rgba(255, 24, 1, 0.15);
+  z-index: -1;
+}
+
+/* Icons */
+.contact-icons {
+  display: flex;
+  justify-content: center;
+  gap: 24px;
+}
+
+.contact-icon-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--primary-red), #c41200);
+  color: #fff;
+  font-size: 1.4rem;
+  text-decoration: none;
+  transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  border: 2px solid transparent;
+  position: relative;
+  z-index: 1;
+}
+
+.contact-icon-btn::before {
+  content: "";
+  position: absolute;
+  inset: -4px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--primary-red), #823a90);
+  filter: blur(18px);
+  opacity: 0;
+  z-index: -1;
+  transition: opacity 0.35s ease;
+}
+
+.contact-icon-btn:hover {
+  border-color: var(--primary-red);
+  transform: translateY(-5px) scale(1.1);
+  box-shadow: 0 0 28px var(--primary-red-glow);
+}
+
+.contact-icon-btn:hover::before {
+  opacity: 0.7;
+}
+
+.contact-icon-btn:last-child:hover {
+  border-color: #0077b5;
+  box-shadow: 0 0 28px rgba(0, 119, 181, 0.45);
+}
+
+.contact-icon-btn:last-child:hover::before {
+  background: linear-gradient(135deg, #0077b5, #004471);
+  opacity: 0.6;
+}
+
+/* Footer */
+footer {
+  text-align: center;
+  padding: 30px;
+  border-top: 1px solid var(--border-color);
+  color: var(--text-muted);
+  font-size: 0.9rem;
+}
+footer i {
+  color: var(--primary-red);
+}
+
+/* Animation Classes */
+/* --- Cinematic Section Fading --- */
+header#home,
+section {
+  min-height: 100vh; /* Forces the section to be exactly the height of your screen */
+  display: flex;
+  flex-direction: column;
+  justify-content: center; /* Pushes content to the absolute vertical center */
+
+  opacity: 0;
+  transform: translateY(80px) scale(0.95);
+  transition: all 0.8s cubic-bezier(0.25, 0.8, 0.25, 1);
+  will-change: opacity, transform;
+  scroll-margin-top: 90px;
+}
+/* We still want the Hero text completely centered */
+header#home {
+  align-items: center;
+}
+
+header#home.section-visible,
+section.section-visible {
+  opacity: 1;
+  transform: translateY(0) scale(1); /* Snaps into focus */
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .about-flex {
+    flex-direction: column;
+    text-align: center;
+  }
+  .hero-content h1 {
+    font-size: 3.5rem;
+  }
+  .nav-links {
+    display: none;
+  }
+  .hamburger {
+    display: block;
+  }
+}
+
+/* --- Rubber Band (Jelly) Name Animation --- */
+.hero-content h1 {
+  font-size: 4.8rem; /* Restores the original massive size! */
+  margin-bottom: 10px;
+  cursor: default; /* Keeps the pointer cursor for the rubber-band effect */
+
+  /* Restores the sleek metallic gradient */
+  background: linear-gradient(to right, #ffffff, #888888);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+.rubber-band {
+  display: inline-block; /* Required for CSS transforms to work on text */
+  animation-duration: 0.8s; /* How fast the bounce happens */
+  animation-fill-mode: both;
+  animation-iteration-count: 1;
+  transform-origin: bottom center;
+  transition: all 0.2s ease;
+}
+
+/* Optional: Flashes F1 Red when the mouse hits the letter */
+.rubber-band:hover {
+  -webkit-text-fill-color: var(--primary-red);
+  text-shadow: 0 0 10px var(--primary-red-glow);
+}
+
+.rubber-band.bouncing {
+  animation-name: rubberBandAnim;
+}
+
+.rubber-band.space {
+  white-space: pre; /* Prevents the space between first and last name from collapsing */
+}
+
+/* The exact squish and stretch physics */
+@keyframes rubberBandAnim {
+  0% {
+    transform: scale3d(1, 1, 1);
+  }
+  30% {
+    transform: scale3d(1.25, 0.75, 1);
+  }
+  40% {
+    transform: scale3d(0.75, 1.25, 1);
+  }
+  50% {
+    transform: scale3d(1.15, 0.85, 1);
+  }
+  65% {
+    transform: scale3d(0.95, 1.05, 1);
+  }
+  75% {
+    transform: scale3d(1.05, 0.95, 1);
+  }
+  100% {
+    transform: scale3d(1, 1, 1);
+  }
+}
+
+/* =========================================================
+   F1 TEAM THEME SWITCHER
+   ========================================================= */
+
+/* --- Theme Variables --- */
+body.theme-mercedes {
+  --primary-red: #00a19b; /* Petronas Teal */
+  --bg-color: #0b0c10;
+  --surface-color: #15161a;
+}
+body.theme-mclaren {
+  --primary-red: #ff8000; /* Papaya Orange */
+  --bg-color: #0a0a0a;
+  --surface-color: #141414;
+}
+body.theme-redbull {
+  --primary-red: #fcd700; /* Red Bull Yellow */
+  --bg-color: #070b19; /* Deep Navy */
+  --surface-color: #0d1326;
+}
+body.theme-aston {
+  --primary-red: #006f62; /* British Racing Green */
+  --bg-color: #050a08;
+  --surface-color: #0a1410;
+}
+
+/* --- Theme Switcher UI --- */
+.theme-switcher-container {
+  position: fixed;
+  top: 25px;
+  right: 30px; /* Positions it to the right of your centered nav pill */
+  z-index: 2000;
+}
+
+.theme-btn {
+  background: rgba(20, 20, 20, 0.7);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  color: var(--text-main);
+  padding: 10px 20px;
+  border-radius: 30px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+  font-family: inherit;
+  font-size: 0.95rem;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+}
+
+.theme-btn:hover {
+  border-color: var(--primary-red);
+  box-shadow:
+    0 5px 20px rgba(0, 0, 0, 0.8),
+    inset 0 0 10px rgba(255, 255, 255, 0.05);
+}
+
+.theme-btn i {
+  font-size: 0.8rem;
+  transition: transform 0.3s ease;
+}
+
+.theme-btn.open i {
+  transform: rotate(180deg);
+}
+
+.theme-options {
+  position: absolute;
+  top: 55px;
+  right: 0;
+  background: rgba(20, 20, 20, 0.95);
+  backdrop-filter: blur(15px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 12px;
+  list-style: none;
+  padding: 10px;
+  width: 220px;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+
+  /* Hidden by default with smooth fade */
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-10px);
+  transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.theme-options.show {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+.theme-option {
+  padding: 10px 15px;
+  border-radius: 8px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  color: var(--text-muted);
+  font-weight: 500;
+  transition: all 0.2s ease;
+}
+
+.theme-option:hover,
+.theme-option.active {
+  background: rgba(255, 255, 255, 0.05);
+  color: var(--text-main);
+}
+
+.team-color {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  box-shadow: 0 0 5px rgba(255, 255, 255, 0.2);
+}
+
+/* Mobile check to prevent overlapping with the nav bar */
+@media (max-width: 1024px) {
+  .theme-switcher-container {
+    top: auto;
+    bottom: 30px;
+    right: 20px;
+  }
+  .theme-options {
+    top: auto;
+    bottom: 60px; /* Opens upward on mobile */
+  }
+}
+
+/* =========================================================
+   LIGHT / DARK MODE SWITCHER
+   ========================================================= */
+
+/* --- The Toggle Button --- */
+#light-dark-toggle {
+  position: fixed;
+  top: 25px;
+  left: 30px; /* Pins it to the top left */
+  z-index: 2000;
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  /* Frosted glass effect matching the right-side button */
+  background: rgba(20, 20, 20, 0.7);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  color: var(--text-main);
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+}
+
+#light-dark-toggle i {
+  font-size: 1.2rem;
+  transition: transform 0.3s ease;
+}
+
+#light-dark-toggle:hover {
+  border-color: var(--primary-red);
+  box-shadow:
+    0 5px 20px rgba(0, 0, 0, 0.8),
+    inset 0 0 10px rgba(255, 255, 255, 0.05);
+  transform: scale(1.15) rotate(-15deg);
+}
+
+/* --- Light Mode Specific Element Overrides --- */
+
+/* 1. Fix the Hero Name Gradient */
+/* Flips the metallic gradient from white/grey to black/dark-grey */
+/* --- Light Mode Color Overrides --- */
+/* The !important tags ensure the F1 Team dark backgrounds cannot override the light theme */
+body.light-mode {
+  --bg-color: #f4f5f7 !important;
+  --surface-color: #ffffff !important;
+  --text-main: #1a1a1a !important;
+  --text-muted: #555555 !important;
+  --border-color: #d1d5db !important;
+}
+
+body.light-mode .hero-content h1 {
+  background: linear-gradient(to right, #111111, #888888);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* 2. Fix the Background Gears */
+/* Changes the gears from 8% white to 6% black so they show up on the light background */
+body.light-mode .gear {
+  color: rgba(0, 0, 0, 0.06);
+}
+
+/* 3. Fix Flowchart Pop-up Details */
+/* Ensures the hidden details text is perfectly readable on light mode */
+body.light-mode .card-details h4 {
+  color: var(--primary-red);
+}
+body.light-mode .card-details p {
+  color: #444444;
+}
+body.light-mode .flowchart-card:hover .card-details {
+  border-top: 1px solid rgba(0, 0, 0, 0.1); /* Changes the divider line to dark */
+}
+
+/* 4. Fix Podium Grid Cards (Bottom of Skills Section) */
+/* Removes the dark gradient and gives it a clean light UI card look */
+body.light-mode .podium-card {
+  background: linear-gradient(145deg, #ffffff, #f0f0f0);
+  border: 1px solid var(--border-color);
+  border-left: 4px solid var(--primary-red);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+}
+body.light-mode .podium-card:hover {
+  box-shadow: -5px 10px 20px rgba(0, 0, 0, 0.15);
+}
+
+/* --- 5. Fix Floating UI (Nav Bar & Theme Buttons) --- */
+/* Forces the frosted glass to become white instead of dark grey */
+/* Apply the frosted glass ONLY to the outer pill and toggle buttons */
+body.light-mode nav,
+body.light-mode #light-dark-toggle,
+body.light-mode .theme-btn,
+body.light-mode .theme-options {
+  background: rgba(255, 255, 255, 0.85) !important;
+  border: 1px solid rgba(0, 0, 0, 0.1) !important;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05) !important;
+}
+
+/* FIX: Strip the accidental border and background from the inner links container */
+body.light-mode .nav-links {
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+}
+
+/* Ensure the nav links are perfectly visible on the white pill */
+body.light-mode .nav-item {
+  color: #555555 !important;
+}
+
+body.light-mode .nav-item:hover,
+body.light-mode .nav-item.active {
+  color: #1a1a1a !important;
+}
+
+/* Fix the text and icons inside the top-left and top-right buttons */
+body.light-mode #light-dark-toggle i,
+body.light-mode .theme-btn i,
+body.light-mode .theme-btn span {
+  color: #1a1a1a !important;
+}
+
+/* --- 6. Fix "Upcoming" Card in Light Mode --- */
+/* Overrides the dark background on the upcoming card */
+body.light-mode .flowchart-card.upcoming {
+  background: #ffffff !important;
+  border: 2px dashed #d1d5db !important; /* Dashed border for the 'upcoming' look */
+  box-shadow: none !important;
+}
+
+/* Ensures the text inside the upcoming card flips to dark grey/black */
+body.light-mode .flowchart-card.upcoming h3 {
+  color: #1a1a1a !important;
+}
+
+/* Hover effect for the upcoming card in light mode */
+body.light-mode .flowchart-card.upcoming:hover {
+  border-color: var(--primary-red) !important;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.05) !important;
+  background: #fdfdfd !important;
+}
+
+/* --- 7. Fix Telemetry Grid Hover in Light Mode --- */
+/* Overrides the dark #111 hover background, keeping it bright and clean */
+body.light-mode .telemetry-node:hover {
+  background: #ffffff !important;
+  border-color: var(--primary-red) !important;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08) !important; /* Soft, modern drop shadow */
+}
+
+/* Ensures the text stays sharp and dark when the card is hovered */
+body.light-mode .telemetry-node:hover span {
+  color: #1a1a1a !important;
+}
+
+/* Mobile check to prevent overlapping on small screens */
+@media (max-width: 1024px) {
+  #light-dark-toggle {
+    top: auto;
+    bottom: 30px;
+    left: 20px; /* Moves to bottom left on mobile */
+  }
+}
+
+/* =========================================================
+   ISOLATED LOADING SCREEN & MODAL (ZERO CONFLICTS)
+   ========================================================= */
+
+#f1-isolated-preloader {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: #0a0a0a;
+  z-index: 999999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition:
+    opacity 0.8s ease,
+    visibility 0.8s ease;
+}
+
+.f1-isolated-loader-content {
+  width: 80%;
+  max-width: 600px;
+  text-align: center;
+  position: relative;
+}
+
+.f1-isolated-loader-text {
+  color: #ffffff;
+  font-size: 1.5rem;
+  margin-bottom: 20px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  animation: f1PulseText 1.5s infinite;
+  font-family: sans-serif;
+}
+
+.f1-isolated-track-line {
+  width: 100%;
+  height: 2px;
+  background: rgba(255, 255, 255, 0.2);
+  position: relative;
+  overflow: visible;
+}
+
+.f1-isolated-car-loader {
+  font-size: 3rem;
+  position: absolute;
+  top: -0px;
+  left: -50px;
+  transform: scaleX(-1);
+  animation: f1DriveAcross 2s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+}
+
+@keyframes f1DriveAcross {
+  0% {
+    left: -10%;
+  }
+  100% {
+    left: 110%;
+  }
+}
+@keyframes f1PulseText {
+  0%,
+  100% {
+    opacity: 0.5;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+.f1-isolated-fade-out {
+  opacity: 0 !important;
+  visibility: hidden !important;
+  pointer-events: none !important;
+}
+
+/* --- Modal --- */
+#f1-isolated-welcome-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.8);
+  backdrop-filter: blur(8px);
+  z-index: 999998;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.5s ease;
+}
+
+#f1-isolated-welcome-modal.f1-isolated-show {
+  opacity: 1;
+  visibility: visible;
+}
+
+.f1-isolated-modal-box {
+  background: rgba(20, 20, 20, 0.95);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 40px;
+  border-radius: 16px;
+  text-align: center;
+  max-width: 500px;
+  width: 90%;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.8);
+  transform: translateY(30px) scale(0.95);
+  transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  font-family: sans-serif;
+}
+
+#f1-isolated-welcome-modal.f1-isolated-show .f1-isolated-modal-box {
+  transform: translateY(0) scale(1);
+}
+
+.f1-isolated-team-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 15px;
+}
+
+.f1-isolated-team-btn {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: #ffffff;
+  padding: 15px;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  transition: all 0.3s ease;
+  font-family: inherit;
+}
+
+.f1-isolated-team-btn:hover {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: #ffffff;
+  transform: translateY(-3px);
+}
+.f1-isolated-color-dot {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  box-shadow: 0 0 5px rgba(255, 255, 255, 0.2);
+  display: inline-block;
+}
+
+/* =========================================================
+   MINI GP - MODAL & FLOATING BUTTON
+   ========================================================= */
+.game-launch-btn {
+  position: fixed;
+  bottom: 40px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 14px 30px;
+  background: var(--primary-red);
+  color: #fff;
+  border: 2px solid var(--primary-red);
+  border-radius: 50px;
+  font-family: "Racing Sans One", cursive;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.5);
+}
+
+.game-launch-btn:hover {
+  background: transparent;
+  color: var(--primary-red);
+  box-shadow: 0 5px 25px var(--primary-red-glow);
+  transform: translateX(-50%) translateY(-3px) scale(1.05);
+}
+
+.game-launch-btn i {
+  font-size: 1.2rem;
+}
+
+/* Modal backdrop */
+.game-modal {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.85);
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.3s ease;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+
+.game-modal.game-modal-open {
+  opacity: 1;
+  visibility: visible;
+}
+
+/* Modal content box */
+.game-modal-content {
+  position: relative;
+  width: 90%;
+  max-width: 420px;
+  transform: scale(0.9) translateY(20px);
+  transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.game-modal-open .game-modal-content {
+  transform: scale(1) translateY(0);
+}
+
+.game-modal-close {
+  position: absolute;
+  top: -40px;
+  right: 0;
+  background: none;
+  border: none;
+  color: #fff;
+  font-size: 2rem;
+  cursor: pointer;
+  z-index: 20;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  opacity: 0.7;
+}
+
+.game-modal-close:hover {
+  opacity: 1;
+  transform: rotate(90deg);
+}
+
+/* Game wrapper inside modal */
+.game-wrapper {
+  position: relative;
+  width: 100%;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 10px 50px rgba(0, 0, 0, 0.8);
+  border: 1px solid var(--border-color);
+}
+
+#gameCanvas {
+  display: block;
+  width: 100%;
+  height: auto;
+  background: #1a1a1a;
+  cursor: pointer;
+}
+
+/* Overlay inside game (start / game-over screen) */
+.game-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.8);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10;
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+}
+
+.game-overlay-content {
+  text-align: center;
+  padding: 30px;
+}
+
+.game-overlay-content h3 {
+  font-family: "Racing Sans One", cursive;
+  font-size: 2rem;
+  color: var(--text-main);
+  margin-bottom: 12px;
+}
+
+.game-overlay-content p {
+  color: var(--text-muted);
+  margin-bottom: 8px;
+  font-size: 1rem;
+}
+
+.game-controls {
+  font-size: 1.2rem;
+  margin-bottom: 25px;
+  letter-spacing: 4px;
+}
+
+.game-controls i {
+  color: var(--primary-red);
+}
+
+/* HUD bar */
+.game-hud {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  padding: 8px 14px;
+  background: rgba(0, 0, 0, 0.6);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  z-index: 5;
+  font-family: 'Courier New', monospace;
+  font-size: 0.85rem;
+  color: #fff;
+  letter-spacing: 1px;
+}
+
+.game-hud span {
+  font-weight: 700;
+}
+
+#gameSpeed {
+  color: var(--primary-red);
+}
+
+.game-hud .game-flag {
+  font-size: 1rem;
+}
+
+/* Light mode overrides */
+body.light-mode .game-launch-btn {
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+}
+
+body.light-mode .game-wrapper {
+  border-color: var(--border-color);
+  box-shadow: 0 10px 50px rgba(0, 0, 0, 0.15);
+}
+
+body.light-mode .game-modal-close {
+  color: #333;
+}
+
+body.light-mode .game-modal {
+  background: rgba(255, 255, 255, 0.85);
+}
+
+@media (max-width: 768px) {
+  .game-launch-btn {
+    bottom: 90px;
+    padding: 12px 24px;
+    font-size: 0.9rem;
+  }
+}
+
+/* =========================================================
+   CONTACT FORM MODAL & BUTTON
+   ========================================================= */
+
+/* Upgrade the code text to a clickable button */
+button.contact-code {
+    cursor: pointer;
+    transition: all 0.3s ease;
+    outline: none;
+    border: 1px dashed rgba(255,255,255,0.1);
+}
+
+button.contact-code:hover {
+    transform: translateY(-3px);
+    border-color: var(--primary-red);
+    box-shadow: 0 5px 20px rgba(255, 24, 1, 0.2);
+    background: rgba(255, 24, 1, 0.08);
+}
+
+/* Form Modal UI */
+.form-modal-content {
+    background: linear-gradient(145deg, rgba(20, 20, 20, 0.95), rgba(10, 10, 10, 0.98));
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 16px;
+    padding: 40px;
+    text-align: left;
+}
+
+.contact-form-wrapper h3 {
+    font-family: "Racing Sans One", cursive;
+    font-size: 1.8rem;
+    color: var(--text-main);
+    margin-bottom: 5px;
+}
+
+.contact-form-wrapper p {
+    color: var(--text-muted);
+    font-size: 0.95rem;
+    margin-bottom: 25px;
+}
+
+.input-group {
+    margin-bottom: 15px;
+}
+
+.input-group input, 
+.input-group textarea {
+    width: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 12px 15px;
+    border-radius: 8px;
+    color: #ffffff;
+    font-family: inherit;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+}
+
+.input-group input:focus, 
+.input-group textarea:focus {
+    outline: none;
+    border-color: var(--primary-red);
+    box-shadow: 0 0 10px rgba(255, 24, 1, 0.2);
+}
+
+#submitContactForm {
+    width: 100%;
+    margin-top: 10px;
+    text-align: center;
+}
+
+.form-status {
+    margin-top: 15px;
+    text-align: center;
+    font-weight: 600;
+    font-size: 0.95rem;
+}
+.status-success { color: #00ff00; }
+.status-error { color: #ff1801; }
+
+/* Light Mode Overrides for the Form */
+body.light-mode button.contact-code { background: #f4f5f7; border-color: rgba(0,0,0,0.1); }
+body.light-mode .form-modal-content { background: #ffffff; border-color: rgba(0,0,0,0.1); }
+body.light-mode .contact-form-wrapper h3 { color: #1a1a1a; }
+body.light-mode .input-group input, 
+body.light-mode .input-group textarea {
+    background: #f4f5f7;
+    border-color: rgba(0,0,0,0.1);
+    color: #1a1a1a;
+}
+body.light-mode .input-group input:focus, 
+body.light-mode .input-group textarea:focus {
+    border-color: var(--primary-red);
+    background: #ffffff;
+}
