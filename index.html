@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aman Mishra | Racing Dynamics & CAE</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=Racing+Sans+One&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+</head>
+<body>
+    <div id="f1-isolated-preloader">
+        <div class="f1-isolated-loader-content">
+            <h2 class="f1-isolated-loader-text">Formation Lap in Progress...</h2>
+            <div class="f1-isolated-track-line"></div>
+            <div class="f1-isolated-car-loader">🏎️</div>
+        </div>
+    </div>
+
+    <div id="f1-isolated-welcome-modal">
+        <div class="f1-isolated-modal-box">
+            <h2 style="color: #ffffff; font-size: 2rem; margin-top: 0;">Choose Your Constructor <i class="fa-solid fa-flag-checkered"></i></h2>
+            <p style="color: #888888; margin-bottom: 30px;">Select your favorite team to configure your telemetry dashboard.</p>
+            
+            <div class="f1-isolated-team-grid">
+                <button class="f1-isolated-team-btn" data-theme="ferrari" data-name="Scuderia Ferrari">
+                    <span class="f1-isolated-color-dot" style="background: #ff1801;"></span> Ferrari
+                </button>
+                <button class="f1-isolated-team-btn" data-theme="mercedes" data-name="Mercedes-AMG">
+                    <span class="f1-isolated-color-dot" style="background: #00A19B;"></span> Mercedes
+                </button>
+                <button class="f1-isolated-team-btn" data-theme="mclaren" data-name="McLaren Racing">
+                    <span class="f1-isolated-color-dot" style="background: #FF8000;"></span> McLaren
+                </button>
+                <button class="f1-isolated-team-btn" data-theme="redbull" data-name="Red Bull Racing">
+                    <span class="f1-isolated-color-dot" style="background: #FCD700;"></span> Red Bull
+                </button>
+                <button class="f1-isolated-team-btn" data-theme="aston" data-name="Aston Martin">
+                    <span class="f1-isolated-color-dot" style="background: #006F62;"></span> Aston
+                </button>
+            </div>
+        </div>
+    </div>
+    <button id="light-dark-toggle" aria-label="Toggle Light/Dark Mode">
+        <i class="fa-solid fa-moon"></i>
+    </button>
+    <div class="theme-switcher-container">
+        <button id="theme-toggle-btn" class="theme-btn">
+            <span class="theme-icon">🏎️</span>
+            <span id="current-theme-name">Scuderia Ferrari</span>
+            <i class="fa-solid fa-chevron-down"></i>
+        </button>
+        
+        <ul id="theme-dropdown" class="theme-options">
+            <li class="theme-option active" data-theme="ferrari">
+                <span class="team-color" style="background: #ff1801;"></span> Scuderia Ferrari
+            </li>
+            <li class="theme-option" data-theme="mercedes">
+                <span class="team-color" style="background: #00A19B;"></span> Mercedes-AMG
+            </li>
+            <li class="theme-option" data-theme="mclaren">
+                <span class="team-color" style="background: #FF8000;"></span> McLaren Racing
+            </li>
+            <li class="theme-option" data-theme="redbull">
+                <span class="team-color" style="background: #FCD700;"></span> Red Bull Racing
+            </li>
+            <li class="theme-option" data-theme="aston">
+                <span class="team-color" style="background: #006F62;"></span> Aston Martin
+            </li>
+        </ul>
+    </div>
+    <div class="gear-background">
+        <i class="fa-solid fa-gear gear gear-1"></i>
+        <i class="fa-solid fa-gear gear gear-2"></i>
+        <i class="fa-solid fa-gear gear gear-3"></i>
+        <i class="fa-solid fa-gear gear gear-4"></i> 
+    </div>
+    
+    <!-- Floating Pill Navigation -->
+    <nav id="navbar" class="floating-nav">
+        <div class="nav-brand">
+            <!-- Replace src with your actual avatar/professional photo -->
+            <img src="images\aman-nav.png" alt="Aman Mishra Avatar" class="nav-avatar">
+        </div>
+        <ul class="nav-links">
+            <li><a href="#home" class="nav-item active">Home</a></li>
+            <li><a href="#about" class="nav-item">About</a></li>
+            <li><a href="#experience" class="nav-item">Experience</a></li>
+            <li><a href="#skills" class="nav-item">Skills</a></li>
+            <li><a href="#projects" class="nav-item">Track Records</a></li>
+            <li><a href="#contact" class="nav-item">Contact</a></li>
+        </ul>
+        <div class="hamburger">
+            <i class="fa-solid fa-bars"></i>
+        </div>
+    </nav>
+
+    <header id="home">
+        <div class="hero-content reveal">
+            <h1>Aman Kumar Mishra</h1>
+                <div class="tagline">
+                    <span class="role">I Crash for Living</span> 
+                    <span class="car-emoji">🏎️</span> 
+                </div>
+
+            <div class="social-hero">
+                <a href="https://www.linkedin.com/in/amankumarmishra01" target="_blank"><i class="fa-brands fa-linkedin"></i></a>
+                <a href="mailto:amankumarmishra343@gmail.com"><i class="fa-solid fa-envelope"></i></a>
+                <a href="https://www.instagram.com/justamanthink/"><i class="fa-brands fa-instagram"></i></a>
+            </div>
+            <a href="#contact" class="btn">Lights Out and Away We Go <i class="fa-solid fa-arrow-right"></i></a>
+        </div>
+        <div class="track-line">
+            <div class="car-wrapper">
+                <span class="f1-car-emoji">🏎️</span>
+            </div>
+        </div>
+    </header>
+
+<!-- About Section -->
+    <section id="about" class="container reveal" style="text-align: center;">
+        <h2 class="section-title">About Me <i class="fa-solid fa-helmet-safety"></i></h2>
+        
+        <!-- MODIFIED: Interactive wrapper for the hover reveal -->
+        <div class="about-interactive-wrapper">
+            <div class="about-image">
+                <!-- Ensure you put your local image path here like "images/aman-avatar.png" -->
+                <img src="images\Profile-pic.jpeg" alt="Aman Mishra">
+                <div class="image-glow"></div>
+            </div>
+            
+            <div class="about-text-reveal">
+                <div class="about-text-inner">
+                    <p>Hi, I am Aman Kumar Mishra </p>
+                    <P>A highly motivated and passionate candidate with a keen interest in passive safety, crashworthiness & vehicle dynamics. Forged with 3 years of experience
+                        in the automotive industry, specialising in FEA & crash analyses. </P>
+                    <br>
+                    <p>Analytical, innovative, and hard-working, as proved by professional feedback and appreciation from the intercultural teams I was involved with while working. Strongly cooperative
+                        with exceptional leadership and technical skills, acquired in engineering and entrepreneurial environments.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="experience" class="container reveal">
+        <h2 class="section-title">Pit Stops <i class="fa-solid fa-stopwatch"></i></h2>
+        <div class="timeline">
+            <div class="timeline-item reveal">
+                <div class="timeline-dot"></div>
+                <div class="timeline-content">
+                    <img src="images\daimler-truck-logo-png_seeklogo-522507.png" alt="Daimler Logo" class="company-logo">
+                    <h3><i class="fa-solid fa-truck-fast"></i> Daimler Truck Innovation Center India</h3>
+                       <h4>CAE Analyst (Passive Safety & Crash)</h4>
+                        <span class="date">02/2023 - Current | Bengaluru, KA</span>
+                        <ul>
+                            <li>Directed crash safety simulation programmes for U.S. vehicle platforms, ensuring alignment with engineering 
+                                    performance targets, homologation requirements, and federal regulatory standards. </li>
+                            <li>Provided technical leadership in developing advanced structural countermeasures, significantly improving 
+                                    crashworthiness and occupant protection performance.</li>
+                            <li>Engineered an implicit methodology for quasi-static loads, achieving 80% higher correlations with tests versus explicit models.</li>
+                            <li>Successfully led the development of a comprehensive crash safety framework for establishing the load cases like FMVSS301, FMVSS207/210, FMVSS222, 
+                                    Kentucky Side Intrusion, Colorado Rack Test etc. and ensuring the robustness of CAE models through rigorous validation with post-test results, improving accuracy by 40%.</li>
+                            <li>Collaborated with cross-functional teams to integrate crash safety considerations into the overall vehicle design process, contributing to the 
+                                development of safer and more reliable commercial vehicles.</li>
+                        </ul>
+                </div>
+            </div>
+            <div class="timeline-item reveal">
+                <div class="timeline-dot"></div>
+                <div class="timeline-content">
+                        <img src="images\Logo_of_Bosch_Rexroth_AG.svg.png" alt="rexroth bosch" class="company-logo">
+                        <h3><i class="fa-solid fa-gears"></i> Rexroth Bosch</h3>
+                        <h4>Engineering Intern (Hydraulics Servicing)</h4>
+                        <span class="date">09/2021 - 10/2021 | Bengaluru, KA</span>
+                        <ul>
+                            <li>Demonstrated initiative by actively contributing to service operations, including diagnostics and performance tuning of pump systems.</li>
+                            <li>Strengthened practical understanding of fluid power systems through direct involvement in maintenance and troubleshooting tasks.</li>
+                            <li>Completed a full detail report on “A Basic Understanding of Hydraulic Systems”.</li>
+                        </ul>
+                    </div>
+                </div>
+            <div class="timeline-item reveal">
+                <div class="timeline-dot"></div>
+                <div class="timeline-content">
+                    <img src="images\1630635121571.png" alt="Force Ikshvaku Racing" class="company-logo">
+                    <h3><i class="fa-solid fa-car-side"></i> Force Ikshvaku Racing</h3>
+                       <h4>Vice-Captain, Suspension Lead</h4>
+                        <span class="date">05/2020 - 01/2023 | Mysuru, KA</span>
+                        <ul>
+                            <li>Designed push–pull rod suspension geometry for the Formula Student car, improving stability, efficiency and track performance.</li>
+                            <li>Manufactured key components, including A‑arms for double‑wishbone suspension and uprights, ensuring precision and durability. </li>
+                            <li>Performed FEA simulations on critical load‑carrying components to evaluate plastic strain, failure limits, and fatigue life.</li>
+                            <li>Applied topology and generative design to optimise a steering component, reducing mass while maintaining stiffness under high lateral loads.</li>
+                        </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="skills" class="container">
+        <h2 class="section-title">Telemetry & Tools <i class="fa-solid fa-chart-line"></i></h2>
+
+        <h3 class="subsection-title">Software Arsenal</h3>
+        <div class="marquee-wrapper">
+            <div class="marquee-track">
+                <div class="tool-badge"><i class="fa-solid fa-microchip"></i> LS-Dyna</div>
+                <div class="tool-badge">
+                    <svg class="cae-icon icon-ansa" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+                        <path d="M256 16 L16 464 H496 Z" fill="none" stroke="currentColor" stroke-width="48" stroke-linejoin="round"/>
+                        <path d="M136 240 H376 M76 352 H436 M256 16 V464 M136 240 L256 464 M376 240 L256 464" fill="none" stroke="currentColor" stroke-width="32" stroke-linejoin="round"/>
+                    </svg> 
+                    ANSA
+                </div>
+
+                <div class="tool-badge">
+                    <svg class="cae-icon icon-meta" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+                        <path d="M32 464 V128 L176 320 L336 96 L480 352" fill="none" stroke="currentColor" stroke-width="48" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M32 464 H480" fill="none" stroke="currentColor" stroke-width="48" stroke-linecap="round"/>
+                        <circle cx="176" cy="320" r="32" fill="currentColor"/>
+                        <circle cx="336" cy="96" r="32" fill="currentColor"/>
+                        <circle cx="480" cy="352" r="32" fill="currentColor"/>
+                    </svg> 
+                    META
+                </div>
+
+                                <div class="tool-badge">
+                        <svg class="cae-icon icon-primer" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+                            <path d="M112 32 V480" fill="none" stroke="currentColor" stroke-width="48" stroke-linecap="round"/>
+                            <path d="M112 32 H336 C424.4 32 496 103.6 496 192 C496 280.4 424.4 352 336 352 H112" fill="none" stroke="currentColor" stroke-width="48" stroke-linecap="round" stroke-linejoin="round"/>
+                            <circle cx="288" cy="192" r="40" fill="currentColor"/>
+                            <path d="M112 192 H248" fill="none" stroke="currentColor" stroke-width="32"/>
+                        </svg>
+                    Primer
+                </div>
+                
+                <div class="tool-badge"><i class="fa-solid fa-cube"></i> Ansys Workbench</div>
+                <div class="tool-badge"><i class="fa-brands fa-python"></i> Python</div>
+                <div class="tool-badge"><i class="fa-solid fa-gear"></i> SolidWorks</div>
+                <div class="tool-badge"><i class="fa-solid fa-calculator"></i> MATLAB</div>
+                <div class="tool-badge"><i class="fa-brands fa-html5"></i> HTML</div>
+                <div class="tool-badge"><i class="fa-brands fa-css3"></i> CSS</div>
+
+                <div class="tool-badge"><i class="fa-solid fa-microchip"></i> LS-Dyna</div>
+                <div class="tool-badge">
+                    <svg class="cae-icon icon-ansa" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+                        <path d="M256 16 L16 464 H496 Z" fill="none" stroke="currentColor" stroke-width="48" stroke-linejoin="round"/>
+                        <path d="M136 240 H376 M76 352 H436 M256 16 V464 M136 240 L256 464 M376 240 L256 464" fill="none" stroke="currentColor" stroke-width="32" stroke-linejoin="round"/>
+                    </svg> 
+                    ANSA
+                </div>
+
+                <div class="tool-badge">
+                    <svg class="cae-icon icon-meta" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+                        <path d="M32 464 V128 L176 320 L336 96 L480 352" fill="none" stroke="currentColor" stroke-width="48" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M32 464 H480" fill="none" stroke="currentColor" stroke-width="48" stroke-linecap="round"/>
+                        <circle cx="176" cy="320" r="32" fill="currentColor"/>
+                        <circle cx="336" cy="96" r="32" fill="currentColor"/>
+                        <circle cx="480" cy="352" r="32" fill="currentColor"/>
+                    </svg>
+                     META
+                </div>
+
+                <div class="tool-badge">
+                        <svg class="cae-icon icon-primer" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+                            <path d="M112 32 V480" fill="none" stroke="currentColor" stroke-width="48" stroke-linecap="round"/>
+                            <path d="M112 32 H336 C424.4 32 496 103.6 496 192 C496 280.4 424.4 352 336 352 H112" fill="none" stroke="currentColor" stroke-width="48" stroke-linecap="round" stroke-linejoin="round"/>
+                            <circle cx="288" cy="192" r="40" fill="currentColor"/>
+                            <path d="M112 192 H248" fill="none" stroke="currentColor" stroke-width="32"/>
+                        </svg>
+                    Primer
+                </div>
+                <div class="tool-badge"><i class="fa-solid fa-cube"></i> Ansys Workbench</div>
+                <div class="tool-badge"><i class="fa-brands fa-python"></i> Python</div>
+                <div class="tool-badge"><i class="fa-solid fa-gear"></i> SolidWorks</div>
+                <div class="tool-badge"><i class="fa-solid fa-calculator"></i> MATLAB</div>
+                <div class="tool-badge"><i class="fa-brands fa-html5"></i> HTML</div>
+                <div class="tool-badge"><i class="fa-brands fa-css3"></i> CSS</div>
+            </div>
+        </div>
+
+        <h3 class="subsection-title">Engineering Telemetry</h3>
+        <div class="telemetry-grid">
+            <div class="telemetry-node">
+                <i class="fa-solid fa-car-burst"></i>
+                <span>Test-CAE Correlations</span>
+            </div>
+            <div class="telemetry-node">
+                <i class="fa-solid fa-user-slash"></i>
+                <span>Occupant Safety</span>
+            </div>
+            <div class="telemetry-node">
+                <i class="fa-solid fa-stopwatch-20"></i>
+                <span>Explicit/Implicit Sims</span>
+            </div>
+            <div class="telemetry-node">
+                <i class="fa-solid fa-network-wired"></i>
+                <span>FEM Modelling</span>
+            </div>
+            <div class="telemetry-node">
+                <i class="fa-solid fa-water"></i>
+                <span>Fluid Structure Interactions</span>
+            </div>
+            <div class="telemetry-node">
+                <i class="fa-solid fa-lightbulb"></i>
+                <span>TRIZ Methodology</span>
+            </div>
+        </div>
+
+        <h3 class="subsection-title" style="margin-top: 50px;">Certs & Volunteering</h3>
+        <div class="podium-grid">
+            <div class="podium-card">
+                <i class="fa-solid fa-flag-checkered icon-red"></i>
+                <div class="podium-info">
+                    <h4>Formula Bharat</h4>
+                    <ul>
+                        <li>Combustion Document Reviewer | 2023 - Current</li>
+                        <li>Technical Committee Member | 2023 - Current</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="podium-card">
+                <i class="fa-solid fa-certificate icon-red"></i>
+                <div class="podium-info">
+                    <h4>Certifications</h4>
+                    <ul>
+                        <li>Aha! Product Management</li>
+                        <li>NPTEL Automation (Silver)</li>
+                        <li>Elite Techno Vehicle Dynamics</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="projects" class="container">
+        <h2 class="section-title">Track Records<i class="fa-solid fa-trophy"></i></h2>
+
+        <div class="flowchart-tree">
+            <div class="tree-trunk"></div>
+            <div class="tree-branch"></div>
+
+            <div class="tree-nodes">
+                <div class="node-wrapper">
+                    <div class="node-stem"></div>
+                    <div class="flowchart-card">
+                        <div class="card-header">
+                            <div class="card-icon"><i class="fa-solid fa-car-side"></i></div>
+                            <h3>TAS Ikshvaku Racing (Formerly Force Ikshvaku)</h3>
+                        </div>
+                        <div class="card-details">
+                            <h4>Vice Captain, Vehicle Dynamics Lead</h4>
+                            <p>Showded the Captain, Leading Vehicle Dynamics and Suspension for Force Ikshavku Racing, a Formula Student chapter for NIE Mysore, helping it obtain its 
+                                highest-ever point tally at Formula Bharat 2023, improving the vehicle stability and performance</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="node-wrapper">
+                    <div class="node-stem"></div>
+                    <div class="flowchart-card">
+                        <div class="card-header">
+                            <div class="card-icon"><i class="fa-solid fa-lightbulb"></i></div>
+                            <h3>Onyx E-Cell</h3>
+                        </div>
+                        <div class="card-details">
+                            <h4>Campus Venture Lead</h4>
+                            <p>I developed comprehensive business plans encompassing mission, vision, value propositions, market analysis, and go-to-market strategies for signature B-Plan competitions like 
+                                IIT Bombay's Eureka, securing top-5 rankings in multiple elevator pitch events. To drive entrepreneurship awareness, I managed campus-wide event calendars and budgets, 
+                                culminating in the successful launch and operation of two active on-campus ventures: a helmet rental service and Bookhub.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="node-wrapper">
+                    <div class="node-stem"></div>
+                    <div class="flowchart-card upcoming">
+                        <div class="card-header">
+                            <div class="card-icon"><i class="fa-solid fa-graduation-cap"></i></div>
+                            <h3>TU Freiberg (Upcoming)</h3>
+                        </div>
+                        <div class="card-details">
+                            <h4>M.Sc. Computational Material Science</h4>
+                            <p>Starting October 2026. Advancing expertise in material systems, computational mechanics, and high-stress analysis.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+<section id="contact" class="container contact-finale reveal">
+        <div class="telemetry-contact-card">
+            
+            <div class="rpm-led-strip">
+                <div class="led led-green"></div><div class="led led-green"></div><div class="led led-green"></div>
+                <div class="led led-green"></div><div class="led led-green"></div><div class="led led-red"></div>
+                <div class="led led-red"></div><div class="led led-red"></div><div class="led led-red"></div>
+                <div class="led led-red"></div><div class="led led-blue"></div><div class="led led-blue"></div>
+                <div class="led led-blue"></div><div class="led led-blue"></div><div class="led led-blue"></div>
+            </div>
+
+            <div class="contact-content">
+                <h2>Checkered Flag <i class="fa-solid fa-flag-checkered"></i></h2>
+                <p class="contact-sub">The race doesn't end here. Let's build something fast.</p>
+                <button id="contact-form-trigger" class="contact-code"><span>GetInTouch</span>();</button>
+                
+                <div class="magnetic-links">
+                    <div class="magnetic-wrapper">
+                        <a href="https://www.linkedin.com/in/amankumarmishra01" target="_blank" class="magnetic-btn btn-linkedin">
+                            <i class="fa-brands fa-linkedin-in"></i> LinkedIn
+                        </a>
+                    </div>
+                    <div class="magnetic-wrapper">
+                        <a href="mailto:amankumarmishra343@gmail.com" class="magnetic-btn btn-email">
+                            <i class="fa-regular fa-envelope"></i> Email Me
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Form Modal -->
+    <div id="contactFormModal" class="game-modal">
+        <div class="game-modal-content form-modal-content">
+            <button id="closeContactForm" class="game-modal-close" aria-label="Close">&times;</button>
+            <div class="contact-form-wrapper">
+                <h3>Transmission Secure <i class="fa-solid fa-lock"></i></h3>
+                <p>Enter your details below to send a direct telemetry ping to my inbox.</p>
+                <form id="googleContactForm">
+                    <div class="input-group">
+                        <input type="text" id="senderName" name="name" required placeholder="Name">
+                    </div>
+                    <div class="input-group">
+                        <input type="email" id="senderEmail" name="email" required placeholder="Email">
+                    </div>
+                    <div class="input-group">
+                        <input type="tel" id="senderPhone" name="phone" placeholder="Phone Number (Optional)">
+                    </div>
+                    <div class="input-group">
+                        <textarea id="senderMessage" name="message" rows="4" required placeholder="Message..."></textarea>
+                    </div>
+                    <button type="submit" id="submitContactForm" class="btn">SEND MESSAGE</button>
+                </form>
+                <div id="formStatusMessage" class="form-status"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Game Modal -->
+    <div id="gameModal" class="game-modal">
+        <div class="game-modal-content">
+            <button id="gameModalClose" class="game-modal-close" aria-label="Close">&times;</button>
+            <div class="game-wrapper">
+                <canvas id="gameCanvas" width="400" height="600"></canvas>
+                <div id="gameOverlay" class="game-overlay">
+                    <div class="game-overlay-content">
+                        <h3 id="overlayTitle">🏎️ MINI GP 🏎️</h3>
+                        <p id="overlayMsg">Dodge oncoming traffic!</p>
+                        <p class="game-controls"><i class="fa-solid fa-arrow-left"></i> <i class="fa-solid fa-arrow-right"></i> or A D</p>
+                        <button id="gameStartBtn" class="btn">START ENGINE</button>
+                    </div>
+                </div>
+                <div class="game-hud">
+                    <span class="game-flag">🏁</span>
+                    <span id="gameScore">0000</span>
+                    <span id="gameSpeed">1x</span>
+                    <span id="gameHighScore">0000</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Floating Game Button -->
+    <button id="gameLaunchBtn" class="game-launch-btn">
+        <i class="fa-solid fa-gamepad"></i> Mini GP
+    </button>
+
+    <footer>
+        <p>&copy; 2026 Aman Mishra. Driven by Passion. <i class="fa-solid fa-flag-checkered"></i></p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
