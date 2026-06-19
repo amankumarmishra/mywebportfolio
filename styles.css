@@ -1998,8 +1998,8 @@ body.light-mode .telemetry-node:hover span {
 .f1-isolated-car-loader {
   font-size: 3rem;
   position: absolute;
-  bottom: -15px; /* CHANGED: Anchors the car's tires perfectly to the bottom track line */
-  left: -50px;
+  /* IMPORTANT: Notice that 'top' has been completely removed! */
+  bottom: -16px; /* This permanently anchors the tires to the bottom line */
   transform: scaleX(-1);
   animation: f1DriveAcross 2s cubic-bezier(0.4, 0, 0.2, 1) infinite;
   z-index: 10;
@@ -2007,12 +2007,13 @@ body.light-mode .telemetry-node:hover span {
 
 @keyframes f1DriveAcross {
   0% {
-    left: -10%;
+    left: -20%;
   }
   100% {
-    left: 110%;
+    left: 120%;
   }
 }
+
 @keyframes f1PulseText {
   0%,
   100% {
