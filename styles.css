@@ -1259,9 +1259,17 @@ section.section-visible {
     text-align: center;
   }
   .hero-content h1 {
-    font-size: 3.5rem;
-    word-break: keep-all;
+    font-size: 3.2rem; /* Scaled down slightly to fit the stacked layout */
+    line-height: 1.1;  /* Keeps the stacked words close together */
   }
+
+  /* NEW: Forces the empty spaces between your names to act as line breaks */
+
+  .rubber-band.space {
+    display: block;
+    height: 5px; /* Adds a tiny bit of vertical breathing room */
+  }
+
   .nav-links {
     display: none;
   }
@@ -2398,4 +2406,31 @@ body.light-mode .input-group input:focus,
 body.light-mode .input-group textarea:focus {
     border-color: var(--primary-red);
     background: #ffffff;
+}
+
+/* =========================================================
+   MOBILE MENU DROPDOWN FIX
+   ========================================================= */
+@media (max-width: 768px) {
+  /* 1. Restores the frosted glass background in Light Mode */
+  body.light-mode .nav-links {
+    background: rgba(255, 255, 255, 0.95) !important;
+    backdrop-filter: blur(12px) !important;
+    -webkit-backdrop-filter: blur(12px) !important;
+    border: 1px solid rgba(0, 0, 0, 0.1) !important;
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15) !important;
+  }
+
+  /* 2. Improves the shape and alignment of the dropdown box */
+  .nav-links {
+    min-width: 200px;      /* Makes the menu box wider so it breathes */
+    align-items: flex-end; /* Aligns the text neatly to the right */
+    z-index: 9999;         /* Guarantees it floats above the 3D hero text */
+  }
+  
+  .nav-item {
+    padding: 5px 10px;
+    width: 100%;
+    text-align: right;     /* Pushes the links toward the hamburger icon */
+  }
 }
