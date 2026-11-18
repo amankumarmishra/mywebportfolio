@@ -1,0 +1,86 @@
+/* Atelier Unit hero frame: 1280x800 design pixels scaled by --u */
+.hero {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  width: 100%;
+  height: 100vh;
+  height: 100dvh;
+  min-height: 560px;
+  background: linear-gradient(180deg, #0d0905 0%, #0f0a05 15%, #0d0a05 30%, #0d0905 45%, #0e0a06 60%, #0f0c07 75%, #130e08 90%, #130e09 100%);
+}
+.hero__photo {
+  --pw: max(min(100vw, 1536 * var(--u)), var(--vh) * 160);
+  --fade: clamp(0px, 100vw - var(--pw), var(--pw) * 0.08);
+  position: absolute;
+  z-index: -3;
+  top: 0;
+  left: calc((100vw - var(--pw)) * 0.5293);
+  width: var(--pw);
+  aspect-ratio: 16 / 10;
+  mask-image: linear-gradient(90deg, transparent, #000 var(--fade), #000 calc(100% - var(--fade)), transparent);
+}
+.hero__photo video { display: block; width: 100%; height: 100%; object-fit: cover; }
+/* livery wash over the amber arc so the video follows the selected team */
+.hero__photo::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: var(--livery);
+  mix-blend-mode: color;
+  opacity: 0.55;
+}
+.hero__arc { position: absolute; inset: 0; z-index: -3; width: 100%; height: 100%; }
+.hero__track { position: absolute; z-index: -2; left: 50%; top: 30%; width: min(92vw, 1100 * var(--u)); translate: -50% 0; opacity: 0.5; }
+
+.hero .tagline { position: absolute; left: calc(100% * 386.5 / 1280); top: var(--bar-t); }
+.hero .contact { position: absolute; left: calc(100% * 798.5 / 1280); top: var(--bar-t); font-style: normal; }
+.hero .tagline span { display: block; }
+.hero .contact > * { display: flex; }
+
+.services { position: absolute; inset-inline: 0; top: calc(211.75 * var(--u)); margin: 0; padding: 0; list-style: none; font-size: max(calc(var(--small-min) * 1.06), 13.3 * var(--u)); line-height: 1; }
+.services li { position: absolute; white-space: nowrap; clip-path: inset(-0.25em -0.4em -0.35em -0.4em); }
+.services li:nth-child(1) { left: var(--bar-l); }
+.services li:nth-child(2) { left: calc(50% - 3 * var(--u)); translate: -50% 0; }
+.services li:nth-child(3) { right: var(--bar-r); }
+.services .rv { display: inline-block; }
+.hero .rule { position: absolute; inset-inline: 0; top: calc(239 * var(--u)); z-index: -1; transform-origin: 0 50%; }
+
+.hero__under { position: absolute; top: calc(254 * var(--u)); inset-inline: var(--bar-l) var(--bar-r); display: flex; justify-content: space-between; align-items: flex-start; gap: 16px; }
+
+.hl {
+  position: absolute;
+  left: 50%;
+  bottom: 0.3em;
+  margin: 0;
+  translate: -50% 0;
+  font-size: min(148 * var(--u), (100vw - 2 * var(--m)) / 5.3);
+  line-height: 0.8;
+  text-align: center;
+  white-space: nowrap;
+}
+.hl__clip { display: block; clip-path: inset(-0.8em -3.6em -0.05em -3.6em); }
+.hl__track { display: block; will-change: transform; }
+
+/* portrait tablets and phones */
+@media (max-aspect-ratio: 114/100) {
+  .hero__photo { --pw: calc(var(--vh) * 138.6); top: calc(var(--vh) * 15); mask-image: linear-gradient(180deg, transparent 0, #000 11%); }
+  .services { top: calc(var(--vh) * 44); font-size: var(--small); }
+  .services li:nth-child(2) { left: 50%; }
+  .hero .rule { top: calc(var(--vh) * 44 + 2.1em); font-size: var(--small); }
+  .hero__under { top: calc(var(--vh) * 44 + 3.4em); font-size: var(--small); }
+  .hl { bottom: max(0.3em, calc(18px + env(safe-area-inset-bottom))); }
+}
+/* below ~900px the icon row would run into the team chip + Menu, so both drop under the top bar */
+@media (max-width: 899px) {
+  .hero .tagline { left: var(--m); top: calc(70px + env(safe-area-inset-top)); }
+  .hero .contact { left: auto; right: var(--m); top: calc(70px + env(safe-area-inset-top)); text-align: right; }
+}
+@media (max-aspect-ratio: 114/100) and (max-width: 679px) {
+  .hero__track { top: 40%; }
+  /* lift the name clear of the fixed lap tracker and Mini GP button */
+  .hl { bottom: calc(60px + env(safe-area-inset-bottom)); }
+}
+@media (max-width: 380px) {
+  .services li:nth-child(2) { display: none; }
+}

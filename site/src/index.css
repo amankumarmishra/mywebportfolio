@@ -1,0 +1,217 @@
+@import 'tailwindcss';
+
+/* ---------- Design tokens (Atelier Unit frame + F1 timing colours) ---------- */
+:root {
+  --vh: 1vh;
+  --u: min(100vw / 1280, var(--vh) * 100 / 800);
+  --small-min: 11px;
+  --small: max(var(--small-min), 12.6 * var(--u));
+
+  --ink: #ffffff;
+  --mute: rgba(255, 255, 255, 0.56);
+  --base-top: #0d0905;
+  --base-bot: #130e09;
+  --surface: #17110b;
+  --rule: rgba(255, 255, 255, 0.115);
+  --grid: rgba(255, 255, 255, 0.0265);
+  --menu-bg: #fcfcfc;
+  --menu-ink: #141414;
+
+  /* timing screen */
+  --pb: #a855f7; /* personal best */
+  --pb-deep: #7c3aed; /* PB fill behind white text (AA contrast) */
+  --improved: #22c55e;
+  --sector: #facc15;
+  /* tyre compounds */
+  --soft: #e10600;
+  --medium: #facc15;
+  --hard: #f2f2f2;
+
+  /* livery: Ferrari default */
+  --livery: #ff1801;
+  --livery-2: #ffeb00;
+  --on-livery: #ffffff;
+
+  --e-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  --e-quint: cubic-bezier(0.22, 1, 0.36, 1);
+  --e-sweep: cubic-bezier(0.76, 0, 0.24, 1);
+  --e-brake: cubic-bezier(0.34, 1.56, 0.64, 1);
+
+  /* top bar placement (Atelier frame) */
+  --m: clamp(16px, 3.2vw, 32px);
+  --bar-l: max(16px, calc(20.65 * var(--u)));
+  --bar-r: max(16px, calc(32 * var(--u)));
+  --bar-t: max(12px, calc(12.8 * var(--u)));
+}
+@media (max-aspect-ratio: 114/100) {
+  :root {
+    --small-min: 12px;
+    --bar-l: var(--m);
+    --bar-r: var(--m);
+    --bar-t: calc(var(--m) * 0.64 + env(safe-area-inset-top));
+  }
+}
+@supports (height: 1dvh) {
+  :root { --vh: 1dvh; }
+}
+@media (min-height: 480px) {
+  :root { --small-min: 11.28px; }
+}
+[data-team='mercedes'] { --livery: #00a19b; --livery-2: #c0c0c0; --on-livery: #ffffff; }
+[data-team='mclaren'] { --livery: #ff8000; --livery-2: #47c7fc; --on-livery: #141414; }
+[data-team='redbull'] { --livery: #fcd700; --livery-2: #1e41ff; --on-livery: #141414; }
+[data-team='aston'] { --livery: #006f62; --livery-2: #cedc00; --on-livery: #ffffff; }
+
+@theme inline {
+  --color-ink: var(--ink);
+  --color-mute: var(--mute);
+  --color-base: var(--base-top);
+  --color-surface: var(--surface);
+  --color-rule: var(--rule);
+  --color-livery: var(--livery);
+  --color-livery-2: var(--livery-2);
+  --color-on-livery: var(--on-livery);
+  --color-pb: var(--pb);
+  --color-pb-deep: var(--pb-deep);
+  --color-improved: var(--improved);
+  --color-sector: var(--sector);
+  --color-menu: var(--menu-bg);
+  --color-menu-ink: var(--menu-ink);
+  --font-sans: 'Archivo', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  --font-mono: 'JetBrains Mono', ui-monospace, monospace;
+}
+
+/* ---------- Base ---------- */
+@layer base {
+*, *::before, *::after { box-sizing: border-box; }
+html {
+  background: var(--base-bot);
+  color-scheme: dark;
+  scrollbar-width: thin;
+  scrollbar-color: var(--livery) var(--base-top);
+}
+html.lenis, html.lenis body { height: auto; }
+.lenis.lenis-smooth { scroll-behavior: auto !important; }
+body {
+  margin: 0;
+  background: linear-gradient(180deg, #0d0905 0%, #0f0a05 30%, #0e0a06 60%, #130e09 100%);
+  color: var(--ink);
+  font-family: var(--font-sans);
+  font-variation-settings: 'wdth' 100;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: geometricPrecision;
+  overflow-x: clip;
+}
+/* body's overflow is handed to the viewport, which still counts the width; clipping here keeps
+   off-screen entrance offsets (cards sliding in from the right) from widening the page on phones */
+main, footer, #home { overflow-x: clip; }
+a, button { color: inherit; font: inherit; }
+a { text-decoration: none; }
+button { background: none; border: 0; padding: 0; cursor: pointer; }
+:focus-visible { outline: 1px solid var(--ink); outline-offset: 3px; }
+::selection { background: var(--livery); color: var(--on-livery); }
+img { max-width: 100%; display: block; }
+}
+
+@layer components {
+
+/* ---------- Type ---------- */
+.small {
+  font-size: var(--small);
+  line-height: 1.15;
+  letter-spacing: -0.03em;
+  -webkit-text-stroke: 0.015em currentColor;
+}
+.display {
+  font-weight: 800;
+  font-variation-settings: 'wdth' 125;
+  letter-spacing: -0.035em;
+  line-height: 0.86;
+  text-transform: uppercase;
+}
+.condensed { font-variation-settings: 'wdth' 70; }
+.mono { font-family: var(--font-mono); letter-spacing: 0; }
+.eyebrow {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--mute);
+}
+
+/* ---------- Textures ---------- */
+.hairgrid {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background-image: repeating-linear-gradient(
+    90deg,
+    transparent 0,
+    transparent calc(100% / 48 * 0.75 - 1px),
+    var(--grid) calc(100% / 48 * 0.75 - 1px),
+    var(--grid) calc(100% / 48 * 0.75 + 1px),
+    transparent calc(100% / 48 * 0.75 + 1px),
+    transparent calc(100% / 48)
+  );
+  mask-image: radial-gradient(ellipse 62% 95% at 50% 62%, rgba(0, 0, 0, 0.83) 0%, #000 100%);
+}
+.carbon {
+  background-color: #100c08;
+  background-image:
+    linear-gradient(45deg, rgba(255, 255, 255, 0.025) 25%, transparent 25%, transparent 75%, rgba(255, 255, 255, 0.025) 75%),
+    linear-gradient(45deg, rgba(255, 255, 255, 0.025) 25%, transparent 25%, transparent 75%, rgba(255, 255, 255, 0.025) 75%),
+    linear-gradient(135deg, rgba(0, 0, 0, 0.35) 25%, transparent 25%, transparent 75%, rgba(0, 0, 0, 0.35) 75%);
+  background-size: 8px 8px, 8px 8px, 8px 8px;
+  background-position: 0 0, 4px 4px, 0 0;
+}
+.grain::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.08;
+  mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+.kerb {
+  height: 10px;
+  background: repeating-linear-gradient(90deg, var(--livery) 0 36px, #f4f4f4 36px 72px);
+}
+.rule-line {
+  height: 1px;
+  background: var(--rule);
+  box-shadow: 0 -1px 0 rgba(255, 255, 255, 0.038), 0 1px 0 rgba(255, 255, 255, 0.014);
+}
+.crash-marker {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: conic-gradient(#111 0 25%, #facc15 0 50%, #111 0 75%, #facc15 0);
+  box-shadow: 0 0 0 2px #111;
+}
+.tyre {
+  display: inline-block;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  border: 3px solid var(--c);
+  background: #0b0b0b;
+}
+
+}
+
+/* ---------- Custom cursor (fine pointers only) ---------- */
+@media (hover: hover) and (pointer: fine) {
+  html.has-cursor, html.has-cursor a, html.has-cursor button { cursor: none; }
+  html.has-cursor input, html.has-cursor textarea { cursor: text; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.15s !important;
+  }
+}
