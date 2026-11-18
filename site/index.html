@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="theme-color" content="#0d0905" />
+    <meta name="description" content="Aman Kumar Mishra, CAE Analyst (Passive Safety & Crash). I Crash for Living." />
+    <title>Aman Mishra | Racing Dynamics & CAE</title>
+    <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <!-- non-blocking font load; system fallbacks paint first -->
+    <link
+      rel="preload"
+      as="style"
+      href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..900&family=JetBrains+Mono:wght@400;600&display=swap"
+      onload="this.onload=null;this.rel='stylesheet'"
+    />
+    <style>
+      html,body{margin:0;background:#0d0905;color:#fff}
+      .boot{position:fixed;inset:0;display:grid;place-items:center;font:600 clamp(28px,6vw,64px)/1 ui-monospace,monospace;letter-spacing:-.02em}
+      .boot small{position:absolute;left:16px;top:12px;font:400 12px/1.2 Helvetica,Arial,sans-serif}
+    </style>
+    <script>
+      // Apply the saved team before first paint so there is no livery flash.
+      try {
+        var t = localStorage.getItem('f1-portfolio-theme');
+        if (t) document.documentElement.dataset.team = t;
+      } catch (e) {}
+    </script>
+  </head>
+  <body>
+    <div id="root"><div class="boot" aria-hidden="true"><small>Formation Lap</small>00:00.000</div></div>
+    <noscript><p style="color:#fff;padding:2rem">Aman Kumar Mishra, CAE Analyst (Passive Safety &amp; Crash). Enable JavaScript to view the full site.</p></noscript>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>
